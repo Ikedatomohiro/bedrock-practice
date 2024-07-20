@@ -1,5 +1,6 @@
-go 1.22
+go 1.22.5
 
-toolchain go1.22.5
-
-use ./hello_aws_bedrock
+use (
+	./hello_aws_bedrock
+	./read_pdf
+)
