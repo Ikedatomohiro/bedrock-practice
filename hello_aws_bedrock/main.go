@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -16,21 +15,22 @@ const region = "us-east-1"
 // This example uses the default settings specified in your shared credentials
 // and config files.
 func main() {
-    sdkConfig, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion(region))
-    if err != nil {
-        fmt.Println("Couldn't load default configuration. Have you set up your AWS account?")
-        fmt.Println(err)
-        return
-    }
-    bedrockClient := bedrock.NewFromConfig(sdkConfig)
-    result, err := bedrockClient.ListFoundationModels(context.TODO(), &bedrock.ListFoundationModelsInput{})
-    if err != nil {
+	sdkConfig, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion(region))
+	if err != nil {
+		fmt.Println("Couldn't load default configuration. Have you set up your AWS account?")
+		fmt.Println(err)
+		return
+	}
+	bedrockClient := bedrock.NewFromConfig(sdkConfig)
+	result, err := bedrockClient.ListFoundationModels(context.TODO(), &bedrock.ListFoundationModelsInput{})
+	if err != nil {
 		fmt.Printf("Couldn't list foundation models. Here's why: %v\n", err)
 		return
-    }
-    if len(result.ModelSummaries) == 0 {
-    fmt.Println("There are no foundation models.")}
-    for _, modelSummary := range result.ModelSummaries {
-        fmt.Println(*modelSummary.ModelId)
-    }
+	}
+	if len(result.ModelSummaries) == 0 {
+		fmt.Println("There are no foundation models.")
+	}
+	for _, modelSummary := range result.ModelSummaries {
+		fmt.Println(*modelSummary.ModelId)
+	}
 }

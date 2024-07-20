@@ -1,4 +1,4 @@
-module github.com/Ikedatomohiro/bedrock-practice.git
+module github.com/Ikedatomohiro/bedrock-practice-hello-aws-bedrock
 
 go 1.22
 
