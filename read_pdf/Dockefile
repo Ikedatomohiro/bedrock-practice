@@ -1,0 +1,22 @@
+FROM golang:latest as builder
+
+# install
+RUN go install github.com/pdfcpu/pdfcpu/cmd/pdfcpu@latest
+
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates gcompat
+
+WORKDIR /root
+
+# Copy the pre-built binary file from the previous stage
+COPY --from=builder /go/bin ./
+
+# Export path of executable
+ENV PATH="${PATH}:/root"
+
+WORKDIR /data
+
+# Command to run executable
+CMD pdfcpu && echo && pdfcpu version -v
+
